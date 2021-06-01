@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.83.1" />
+
+
+<title>Mindent a dínókról - Mindent a dinoszauruszokról</title>
+<meta property="og:title" content="Mindent a dínókról - Mindent a dinoszauruszokról">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="https://github.com/rzita/example">GitHub</a></li>
+    
+    <li><a href="/rolam/">Rólam</a></li>
+    
+    <li><a href="https://twitter.com/dinoman_j">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">1 min read</span>
+    
+
+    <h1 class="article-title">Mindent a dínókról</h1>
+
+    
+    <span class="article-date">0001-01-01</span>
+    
+
+    <div class="article-content">
+      <pre><code class="language-{r" data-lang="{r">knitr::opts_chunk$set(echo = TRUE)
+</code></pre><h2 id="a-dinoszauruszok-csodálatos-világa">A dinoszauruszok csodálatos világa</h2>
+<p>A dínók nagyon régen éltek. Olyan régen, hogy akkor emberek még nem is léteztek. Mégis tudunk róluk pár dolgot. 
+A dínókról szóló adatokat a <a href="https://www.kaggle.com/kjanjua/jurassic-park-the-exhaustive-dinosaur-dataset">https://www.kaggle.com/kjanjua/jurassic-park-the-exhaustive-dinosaur-dataset</a> oldalon találtam. Itt láthatsz egy rövid kivonatot arról, hogy milyen adatokat jegyeztek fel a dínókról:</p>
+<pre><code class="language-{r" data-lang="{r">library(ggplot2)
+url &lt;- &quot;https://github.com/rzita/dinodata/blob/main/dinosaur.csv&quot;
+dinodata &lt;- read.csv(file = 'dinosaur.csv')
+dinodata[1:1,]
+</code></pre><p>Tudjuk a dínókról, hogy volt köztük <strong>növényevő</strong> és <strong>húsevő</strong> fajta, sőt ezek kombinációja (mindenevő) is.</p>
+<pre><code class="language-{r" data-lang="{r">library(tidyverse)
+url &lt;- &quot;https://github.com/rzita/dinodata/blob/main/dinosaur.csv&quot;
+dinodata &lt;- read.csv(file = 'dinosaur.csv')
+dinodata %&gt;%
+    count(diet) %&gt;% 
+    mutate(diet = factor(diet), percentage = n / sum(n)) %&gt;% 
+    ggplot(aes(x = &quot;&quot;, percentage, fill = diet)) +
+    geom_col(color=&quot;white&quot;) +
+    coord_polar(theta = &quot;y&quot;, start=0) +
+    theme_void()
+</code></pre><p>A maradványaik pedig megmutatják, hogy nagyjából <strong>mekkorák</strong> voltak.</p>
+<pre><code class="language-{r" data-lang="{r">library(tidyverse)
+url &lt;- &quot;https://github.com/rzita/dinodata/blob/main/dinosaur.csv&quot;
+dinodata &lt;- read.csv(file = 'dinosaur.csv')
+dinodata$length = as.factor(dinodata$length)
+freq&lt;-table(dinodata$length)
+barplot(freq, main=&quot;Dinók nagyság szerinti megoszlása&quot;, ylab = &quot;gyakoriság&quot;, xlab = &quot;magasság&quot;)
+</code></pre><p><strong>Ne érd be ennyivel! Sokféle adatot talász még a dínókról, amit te is szabadon elemezhetsz.</strong></p>
+<p>&mdash; VÉGE &mdash;</p>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+
